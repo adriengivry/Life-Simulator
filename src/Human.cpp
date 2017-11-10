@@ -194,7 +194,7 @@ void Human::DayTick()
 
 		Move();
 
-		if (m_age == m_ageOfDeath)
+		if (m_age == m_ageOfDeath || random_between(1, __DESEASE_RATE) == 1)
 			m_isDead = true;
 	}
 }

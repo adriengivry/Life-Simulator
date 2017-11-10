@@ -34,11 +34,14 @@ private:
 	sf::Text m_dayCounterText;
 	sf::Text m_ageText;
 	sf::Text m_nameText;
+	sf::Text m_aliveCounterText;
 
 	sf::Color m_circleColor;
 	sf::CircleShape m_socialRadius;
 
 	uint16_t m_dayCounter;
+
+	uint16_t m_aliveCounter;
 
 	Window m_window;
 };

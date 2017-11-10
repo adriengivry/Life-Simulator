@@ -19,6 +19,11 @@ void Application::Setup()
 	m_dayCounterText.setCharacterSize(30);
 	m_dayCounterText.setFillColor(sf::Color::White);
 
+	m_aliveCounterText.setFont(m_font);
+	m_aliveCounterText.setPosition(400, 50);
+	m_aliveCounterText.setCharacterSize(20);
+	m_aliveCounterText.setFillColor(sf::Color::White);
+
 	m_ageText.setFont(m_font);
 	m_ageText.setCharacterSize(20);
 	m_ageText.setFillColor(sf::Color::White);
@@ -38,12 +43,14 @@ void Application::Setup()
 	eve->SetName("eve");
 	m_humans.push_back(eve);
 
+	m_aliveCounter = 2;
+
 	m_circleColor.a = 100;
 }
 
 void Application::Run()
 {
-	while(m_window.isOpen() && m_humans.size() > 0)
+	while(m_window.isOpen() && m_aliveCounter > 0)
 	{
 		Update();
 	}
@@ -115,6 +122,7 @@ void Application::Tick()
 							std::cout << "[" << m_dayCounter << "] " << h->GetName() << " and " << h2->GetName() << " created " << baby->GetName() << std::endl;
 							baby->SetPosition(h->GetPosition().x, h->GetPosition().y);
 							m_humans.push_back(baby);
+							++m_aliveCounter;
 						}
 						else
 						{
@@ -131,6 +139,7 @@ void Application::Tick()
 			std::cout << "[" << m_dayCounter << "] " << h->GetName() << " died after " << std::to_string(h->GetAge()) << " years" << std::endl;
 			delete *it;
 			*it = nullptr;
+			--m_aliveCounter;
 		}
 	}
 
@@ -175,4 +184,10 @@ void Application::Draw()
 	m_dayCounterText.setOrigin(textRect.left + textRect.width / 2.0f,
 		textRect.top + textRect.height / 2.0f);
 	m_window.draw(m_dayCounterText);
+
+	m_aliveCounterText.setString("Alive : " + std::to_string(m_aliveCounter));
+	const sf::FloatRect textRect2 = m_aliveCounterText.getLocalBounds();
+	m_aliveCounterText.setOrigin(textRect2.left + textRect2.width / 2.0f,
+		textRect2.top + textRect2.height / 2.0f);
+	m_window.draw(m_aliveCounterText);
 }
