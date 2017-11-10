@@ -30,7 +30,11 @@ private:
 
 	std::list<Human*> m_humans;
 
-	sf::RectangleShape m_thing;
+	sf::Font m_font;
+	sf::Text m_dayCounterText;
+	sf::Text m_ageText;
+
+	sf::Color m_circleColor;
 	sf::CircleShape m_socialRadius;
 
 	uint16_t m_dayCounter;

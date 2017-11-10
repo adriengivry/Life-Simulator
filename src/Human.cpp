@@ -34,6 +34,8 @@ Human::Human(Human* p_mom)
 
 	m_position.x = 0;
 	m_position.y = 0;
+
+	SetRandomVelocity();
 }
 
 Human::~Human()
@@ -74,19 +76,65 @@ Human* Human::Procreate()
 	++m_childrenCounter;
 	m_lastProcreateLivingDay = m_livingDay;
 
-	Human* child;
 	if (m_gender == Gender::FEMALE)
-		child = new Human(this);
-	else
-		child = new Human;
-
-	return child;
+		return new Human(this);
+	
+	return nullptr;
 }
 
 void Human::SetPosition(const float p_x, const float p_y)
 {
 	m_position.x = p_x;
 	m_position.y = p_y;
+}
+
+void Human::SetRandomVelocity()
+{
+	do
+	{
+		m_velocity.x = random_between(0, 2) - 1;
+		m_velocity.y = random_between(0, 2) - 1;
+	} while (m_velocity.x == 0 && m_velocity.y == 0);
+}
+
+bool Human::CanMeet(Human* p_other)
+{
+	if (p_other && p_other != this)
+	{
+		return sqrt(pow(m_position.x - p_other->GetPosition().x, 2) + pow(m_position.y - p_other->GetPosition().y, 2)) <= __SOCIAL_RADIUS;
+	}
+
+	return false;
+}
+
+void Human::Move()
+{
+	m_position.x += m_velocity.x;
+	m_position.y += m_velocity.y;
+
+	if (m_position.x < 0)
+	{
+		m_position.x = 0;
+		m_velocity.x *= -1;
+	}
+
+	if (m_position.x > 800)
+	{
+		m_position.x = 800;
+		m_velocity.x *= -1;
+	}
+
+	if (m_position.y < 0)
+	{
+		m_position.y = 0;
+		m_velocity.y *= -1;
+	}
+
+	if (m_position.y > 800)
+	{
+		m_position.y = 800;
+		m_velocity.y *= -1;
+	}
 }
 
 void Human::DayTick()
@@ -99,6 +147,11 @@ void Human::DayTick()
 		{
 			++m_age;
 		}
+
+		if (random_between(0, 100) == 100)
+			SetRandomVelocity();
+
+		Move();
 
 		if (m_age == m_ageOfDeath)
 			m_isDead = true;

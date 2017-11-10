@@ -10,16 +10,16 @@
 class Human
 {
 public:
-	const uint8_t __MAX_CHILDREN = 3;
-	const uint8_t __PROCREATION_FAIL_RATE = 10;
-	const uint8_t __MIN_AGE_OF_DEATH = 50;
-	const uint8_t __MAX_AGE_OF_DEATH = 100;
-	const uint8_t __MIN_AGE_TO_PROCREATE = 14;
+	const uint8_t __MAX_CHILDREN = 4;
+	const uint8_t __PROCREATION_FAIL_RATE = 5;
+	const uint8_t __MIN_AGE_OF_DEATH = 5;
+	const uint8_t __MAX_AGE_OF_DEATH = 7;
+	const uint8_t __MIN_AGE_TO_PROCREATE = 2;
 
-	const uint16_t __SOCIAL_RADIUS = 10;
+	const uint16_t __SOCIAL_RADIUS = 15;
 
-	const uint16_t __MALE_DAY_BETWEEN_PROCREATE = 5;
-	const uint16_t __FEMALE_DAY_BETWEEN_PROCREATE = 300;
+	const uint16_t __MALE_DAY_BETWEEN_PROCREATE = 30;
+	const uint16_t __FEMALE_DAY_BETWEEN_PROCREATE = 250;
 
 	enum class Gender
 	{
@@ -31,16 +31,20 @@ public:
 	~Human();
 
 	bool CanProcreate() const;
-	Human* Procreate();
-
-	sf::Color& GetColor() { return m_color; }
-
+	bool CanMeet(Human* p_other);
 	bool IsDead() const { return m_isDead; }
 
-	void SetPosition(const float p_x, const float p_y);
 
+	sf::Color& GetColor() { return m_color; }
+	uint8_t GetAge() const { return m_age; }
 	sf::Vector2f& GetPosition() { return m_position; }
+	Gender GetGender() const { return m_gender; }
 
+	void SetPosition(const float p_x, const float p_y);
+	void SetRandomVelocity();
+
+	Human* Procreate();
+	void Move();
 	void DayTick();
 
 private:
@@ -57,6 +61,7 @@ private:
 	uint16_t m_lastProcreateLivingDay;
 
 	sf::Vector2f m_position;
+	sf::Vector2f m_velocity;
 
 	uint8_t m_childrenCounter;
 
