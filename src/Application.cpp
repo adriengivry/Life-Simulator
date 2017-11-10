@@ -23,22 +23,27 @@ void Application::Setup()
 	m_ageText.setCharacterSize(12);
 	m_ageText.setFillColor(sf::Color::White);
 
-	for (int i = 0; i < 100; ++i)
-	{
-		Human* h = new Human;
-		h->SetPosition(random_between(0, 800), random_between(0, 800));
-		m_humans.push_back(h);
-	}
+
+	Human* adam = new Human(Human::Gender::MALE);
+	adam->SetPosition(random_between(0, 800), random_between(0, 800));
+	m_humans.push_back(adam);
+
+	Human* eve = new Human(Human::Gender::FEMALE);
+	eve->SetPosition(random_between(0, 800), random_between(0, 800));
+	m_humans.push_back(eve);
 
 	m_circleColor.a = 100;
 }
 
 void Application::Run()
 {
-	while(m_window.isOpen())
+	while(m_window.isOpen() && m_humans.size() > 0)
 	{
 		Update();
 	}
+
+	std::cout << "Colony lifetime : " << m_dayCounter << " days" << std::endl;
+	system("PAUSE");
 }
 
 void Application::HandleEvents()

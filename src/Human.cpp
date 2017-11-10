@@ -1,31 +1,47 @@
 #include "Human.h"
 
+Human::Human(const Gender p_gender)
+{
+	m_gender = p_gender;
+
+	Init();
+}
+
 Human::Human(Human* p_mom)
 {
-	switch (random_between(0, 1))
-	{
-	case 0:
+	if (random_between(0, 1) == 0)
 		m_gender = Gender::MALE;
+	else
+		m_gender = Gender::MALE;
+
+	m_mom = p_mom;
+
+	Init();
+}
+
+Human::~Human()
+{
+}
+
+void Human::Init()
+{
+	if (m_gender == Gender::MALE)
+	{
 		m_color.r = 0;
 		m_color.g = 0;
 		m_color.b = 255;
-		break;
-
-	case 1:
-		m_gender = Gender::FEMALE;
+	}
+	else if (m_gender == Gender::FEMALE)
+	{
 		m_color.r = 255;
 		m_color.g = 102;
 		m_color.b = 204;
-		break;
-
-	default:
-		m_gender = Gender::MALE;
-		break;
 	}
+
+	SetRandomVelocity();
 
 	m_childrenCounter = 0;
 
-	m_mom = p_mom;
 	m_age = 0;
 	m_ageOfDeath = static_cast<uint8_t>(random_between(__MIN_AGE_OF_DEATH, __MAX_AGE_OF_DEATH));
 	m_livingDay = 0;
@@ -34,12 +50,6 @@ Human::Human(Human* p_mom)
 
 	m_position.x = 0;
 	m_position.y = 0;
-
-	SetRandomVelocity();
-}
-
-Human::~Human()
-{
 }
 
 bool Human::CanProcreate() const
