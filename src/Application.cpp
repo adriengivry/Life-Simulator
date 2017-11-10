@@ -56,7 +56,7 @@ void Application::Run()
 	}
 
 	std::cout << "Colony lifetime : " << m_dayCounter << " days (" << m_dayCounter / 365 << " years)" << std::endl;
-	system("PAUSE");
+	sf::sleep(sf::seconds(2));
 }
 
 void Application::HandleEvents()

@@ -14,10 +14,10 @@ class Human
 public:
 	const uint8_t __MAX_CHILDREN = 3;
 	const uint8_t __PROCREATION_FAIL_RATE = 25;
-	const uint8_t __MIN_AGE_OF_DEATH = 8;
-	const uint8_t __MAX_AGE_OF_DEATH = 12;
+	const uint8_t __MIN_AGE_OF_DEATH = 15;
+	const uint8_t __MAX_AGE_OF_DEATH = 25;
 	const uint8_t __MIN_AGE_TO_PROCREATE = 2;
-	const uint16_t __DESEASE_RATE = 10000;
+	const uint16_t __DESEASE_RATE = 30000;
 
 	const uint16_t __SOCIAL_RADIUS = 20;
 
