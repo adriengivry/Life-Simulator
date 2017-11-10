@@ -2,6 +2,7 @@
 
 #include <ctime>
 #include <iostream>
+#include <list>
 
 #include "Util.h"
 #include "Window.h"
@@ -27,10 +28,12 @@ public:
 private:
 	sf::Event m_event;
 
-	Human johnny;
+	std::list<Human*> m_humans;
 
 	sf::RectangleShape m_thing;
-	sf::CircleShape m_socialRange;
+	sf::CircleShape m_socialRadius;
+
+	uint16_t m_dayCounter;
 
 	Window m_window;
 };

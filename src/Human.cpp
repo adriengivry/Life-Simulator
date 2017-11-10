@@ -1,17 +1,22 @@
 #include "Human.h"
-#include "Util.h"
 
 Human::Human(Human* p_mom)
 {
-
 	switch (random_between(0, 1))
 	{
 	case 0:
 		m_gender = Gender::MALE;
+		m_color.r = 0;
+		m_color.g = 0;
+		m_color.b = 255;
 		break;
 
 	case 1:
 		m_gender = Gender::FEMALE;
+		m_color.r = 255;
+		m_color.g = 102;
+		m_color.b = 204;
+		break;
 
 	default:
 		m_gender = Gender::MALE;
