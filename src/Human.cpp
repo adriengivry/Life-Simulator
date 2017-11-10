@@ -142,7 +142,7 @@ bool Human::CanMeet(Human* p_other)
 {
 	if (p_other && p_other != this)
 	{
-		return sqrt(pow(m_position.x - p_other->GetPosition().x, 2) + pow(m_position.y - p_other->GetPosition().y, 2)) <= __SOCIAL_RADIUS;
+		return sqrt(pow(m_position.x - p_other->GetPosition().x, 2) + pow(m_position.y - p_other->GetPosition().y, 2)) <= __SOCIAL_RADIUS * 2;
 	}
 
 	return false;
@@ -150,8 +150,8 @@ bool Human::CanMeet(Human* p_other)
 
 void Human::Move()
 {
-	m_position.x += m_velocity.x;
-	m_position.y += m_velocity.y;
+	m_position.x += m_velocity.x * (30 - m_age) / 5;
+	m_position.y += m_velocity.y * (30 - m_age) / 5;
 
 	if (m_position.x < 0)
 	{
@@ -189,7 +189,7 @@ void Human::DayTick()
 			++m_age;
 		}
 
-		if (random_between(0, 100) == 100)
+		if (random_between(0, 500) == 0)
 			SetRandomVelocity();
 
 		Move();

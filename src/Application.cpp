@@ -48,7 +48,7 @@ void Application::Run()
 		Update();
 	}
 
-	std::cout << "Colony lifetime : " << m_dayCounter << " days" << std::endl;
+	std::cout << "Colony lifetime : " << m_dayCounter << " days (" << m_dayCounter / 365 << " years)" << std::endl;
 	system("PAUSE");
 }
 
@@ -112,8 +112,13 @@ void Application::Tick()
 
 						if (baby)
 						{
+							std::cout << "[" << m_dayCounter << "] " << h->GetName() << " and " << h2->GetName() << " created " << baby->GetName() << std::endl;
 							baby->SetPosition(h->GetPosition().x, h->GetPosition().y);
 							m_humans.push_back(baby);
+						}
+						else
+						{
+							std::cout << "[" << m_dayCounter << "] " << h->GetName() << " and " << h2->GetName() << " failed creating a baby" << std::endl;
 						}
 					}
 				}
@@ -123,6 +128,8 @@ void Application::Tick()
 		h->DayTick();
 		if (h->IsDead())
 		{
+			std::cout << "[" << m_dayCounter << "] " << h->GetName() << " died after " << std::to_string(h->GetAge()) << " years" << std::endl;
+			delete *it;
 			*it = nullptr;
 		}
 	}
@@ -163,7 +170,7 @@ void Application::Draw()
 		m_window.draw(m_nameText);
 	}
 
-	m_dayCounterText.setString("DAY: " + std::to_string(m_dayCounter));
+	m_dayCounterText.setString("DAY: " + std::to_string(m_dayCounter) + " (" + std::to_string(m_dayCounter / 365) + " years)");
 	const sf::FloatRect textRect = m_dayCounterText.getLocalBounds();
 	m_dayCounterText.setOrigin(textRect.left + textRect.width / 2.0f,
 		textRect.top + textRect.height / 2.0f);

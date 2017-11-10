@@ -12,16 +12,16 @@
 class Human
 {
 public:
-	const uint8_t __MAX_CHILDREN = 10;
-	const uint8_t __PROCREATION_FAIL_RATE = 5;
+	const uint8_t __MAX_CHILDREN = 3;
+	const uint8_t __PROCREATION_FAIL_RATE = 15;
 	const uint8_t __MIN_AGE_OF_DEATH = 15;
 	const uint8_t __MAX_AGE_OF_DEATH = 30;
-	const uint8_t __MIN_AGE_TO_PROCREATE = 2;
+	const uint8_t __MIN_AGE_TO_PROCREATE = 5;
 
-	const uint16_t __SOCIAL_RADIUS = 25;
+	const uint16_t __SOCIAL_RADIUS = 15;
 
 	const uint16_t __MALE_DAY_BETWEEN_PROCREATE = 30;
-	const uint16_t __FEMALE_DAY_BETWEEN_PROCREATE = 150;
+	const uint16_t __FEMALE_DAY_BETWEEN_PROCREATE = 350;
 
 	enum class Gender
 	{
