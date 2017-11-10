@@ -25,18 +25,49 @@ Human::~Human()
 
 void Human::Init()
 {
+	std::string line;
+	std::ifstream* myfile = nullptr;
+
 	if (m_gender == Gender::MALE)
 	{
 		m_color.r = 0;
 		m_color.g = 0;
 		m_color.b = 255;
+		myfile = new std::ifstream("../config/names/male");
 	}
 	else if (m_gender == Gender::FEMALE)
 	{
 		m_color.r = 255;
 		m_color.g = 102;
 		m_color.b = 204;
+		myfile = new std::ifstream("../config/names/female");
 	}
+
+	
+	if (myfile->is_open())
+	{
+		int lineCounter = 0;
+		while (getline(*myfile, line))
+		{
+			++lineCounter;
+		}
+
+		myfile->clear();
+		myfile->seekg(0, std::ios::beg);
+
+		const int randomLine = random_between(1, lineCounter);
+		int buff = 1;
+
+		while (getline(*myfile, line))
+		{
+			if (buff++ == randomLine)
+				m_name = line;
+		}
+
+		myfile->close();
+	}
+
+	delete myfile;
 
 	SetRandomVelocity();
 

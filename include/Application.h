@@ -33,6 +33,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_dayCounterText;
 	sf::Text m_ageText;
+	sf::Text m_nameText;
 
 	sf::Color m_circleColor;
 	sf::CircleShape m_socialRadius;

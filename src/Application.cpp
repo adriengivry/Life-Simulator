@@ -20,16 +20,22 @@ void Application::Setup()
 	m_dayCounterText.setFillColor(sf::Color::White);
 
 	m_ageText.setFont(m_font);
-	m_ageText.setCharacterSize(12);
+	m_ageText.setCharacterSize(20);
 	m_ageText.setFillColor(sf::Color::White);
+
+	m_nameText.setFont(m_font);
+	m_nameText.setCharacterSize(15);
+	m_nameText.setFillColor(sf::Color::White);
 
 
 	Human* adam = new Human(Human::Gender::MALE);
 	adam->SetPosition(random_between(0, 800), random_between(0, 800));
+	adam->SetName("adam");
 	m_humans.push_back(adam);
 
 	Human* eve = new Human(Human::Gender::FEMALE);
 	eve->SetPosition(random_between(0, 800), random_between(0, 800));
+	eve->SetName("eve");
 	m_humans.push_back(eve);
 
 	m_circleColor.a = 100;
@@ -148,6 +154,13 @@ void Application::Draw()
 		m_ageText.setOrigin(textRect.left + textRect.width / 2.0f,
 			textRect.top + textRect.height / 2.0f);
 		m_window.draw(m_ageText);
+
+		m_nameText.setString(h->GetName());
+		m_nameText.setPosition(h->GetPosition().x, h->GetPosition().y - h->__SOCIAL_RADIUS - 10);
+		const sf::FloatRect textRect2 = m_nameText.getLocalBounds();
+		m_nameText.setOrigin(textRect2.left + textRect2.width / 2.0f,
+			textRect2.top + textRect2.height / 2.0f);
+		m_window.draw(m_nameText);
 	}
 
 	m_dayCounterText.setString("DAY: " + std::to_string(m_dayCounter));

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
+#include <string>
 
 #include <SFML/Graphics.hpp>
 
@@ -16,7 +18,7 @@ public:
 	const uint8_t __MAX_AGE_OF_DEATH = 30;
 	const uint8_t __MIN_AGE_TO_PROCREATE = 2;
 
-	const uint16_t __SOCIAL_RADIUS = 20;
+	const uint16_t __SOCIAL_RADIUS = 25;
 
 	const uint16_t __MALE_DAY_BETWEEN_PROCREATE = 30;
 	const uint16_t __FEMALE_DAY_BETWEEN_PROCREATE = 150;
@@ -41,9 +43,11 @@ public:
 	uint8_t GetAge() const { return m_age; }
 	sf::Vector2f& GetPosition() { return m_position; }
 	Gender GetGender() const { return m_gender; }
+	std::string& GetName() { return m_name; }
 
 	void SetPosition(const float p_x, const float p_y);
 	void SetRandomVelocity();
+	void SetName(const std::string p_name) { m_name = p_name; }
 
 	Human* Procreate();
 	void Move();
@@ -64,6 +68,8 @@ private:
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_velocity;
+
+	std::string m_name;
 
 	uint8_t m_childrenCounter;
 
