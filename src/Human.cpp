@@ -12,7 +12,7 @@ Human::Human(Human* p_mom)
 	if (random_between(0, 1) == 0)
 		m_gender = Gender::MALE;
 	else
-		m_gender = Gender::MALE;
+		m_gender = Gender::FEMALE;
 
 	m_mom = p_mom;
 
