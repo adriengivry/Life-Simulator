@@ -17,7 +17,7 @@ public:
 	const uint8_t __MIN_AGE_OF_DEATH = 8;
 	const uint8_t __MAX_AGE_OF_DEATH = 12;
 	const uint8_t __MIN_AGE_TO_PROCREATE = 2;
-	const uint16_t __DESEASE_RATE = 3600;
+	const uint16_t __DESEASE_RATE = 10000;
 
 	const uint16_t __SOCIAL_RADIUS = 20;
 
